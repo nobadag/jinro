@@ -123,11 +123,11 @@ void day(int *die)
         for(ins = 0; ins <= elm; ins++){
           if(i == candi[ins]){
             printf(" %dE%s‚³‚ñ\n",i + 1,data[i].name);
-            printf("\n");
             fprintf(rec,"E%s‚³‚ñ\n",data[i].name);
           }
         }
       }
+      printf("\n");
     } else{
       printf("\n %s‚³‚ñ‚ª’Ç•ú‚³‚ê‚Ü‚µ‚½B\n",data[big_num].name);
       fprintf(rec,"\n %s‚³‚ñ‚ª’Ç•ú\n\n",data[big_num].name);
