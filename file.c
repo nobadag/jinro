@@ -12,7 +12,7 @@ int last(void)
   int answer;
   char ques[4];
 
-  box = fopen("box.dat","rb");
+  box = fopen(".\\Datas\\box.dat","rb");
   if(box == NULL){
     answer = DO_NOT_USE_LAST;
     return answer;
@@ -34,9 +34,9 @@ void read(void)
 {
   int i;
 
-  reg = fopen("register.csv","r");
-  player = fopen("player.csv","r");
-  box = fopen("box.dat","rb");
+  reg = fopen(".\\Datas\\register.csv","r");
+  player = fopen(".\\Datas\\player.csv","r");
+  box = fopen(".\\Datas\\box.dat","rb");
 
   fscanf(reg,"%lf,%d,%d,%d,%d,%d,%d",&join,&wolf,&prophet,&knight,&mediumship,&traitor,&first);
   live = join;
@@ -90,10 +90,10 @@ void record(void)
 {
   int i;
 
-  rec = fopen("log.txt","w");
-  reg = fopen("register.csv","w");
-  player = fopen("player.csv","w");
-  box = fopen("box.dat","wb");
+  rec = fopen(".\\Logs\\log.txt","w");
+  reg = fopen(".\\Datas\\register.csv","w");
+  player = fopen(".\\Datas\\player.csv","w");
+  box = fopen(".\\Datas\\box.dat","wb");
 
   fprintf(reg,"%f,%d,%d,%d,%d,%d,%d",join,wolf,prophet,knight,mediumship,traitor,first);
   for(i = 0; i < join; i++){
@@ -120,7 +120,8 @@ void record(void)
 void save(void)
 {
   char ques[4];
-  char log_name[24];
+  char log_name[25];
+  char log_file[35];
 
   fwrite(dice,sizeof(int),join,box);
   fclose(rec);
@@ -133,12 +134,12 @@ void save(void)
     scanf("%3s",ques);
   } while(strcmp(ques,"yes") != 0 && strcmp(ques,"no") != 0);
   if(strcmp(ques,"no")== 0){
-    remove("log.txt");
+    remove(".\\Logs\\log.txt");
   } else{
     printf(" ログの名前を入力してください。（１２字以内）");
     scanf("%22s",log_name);
-    strcat(log_name,".txt");
-    rename("log.txt",log_name);
+    sprintf(log_file,"%s%s%s",".\\Logs\\",log_name,".txt");
+    rename(".\\Logs\\log.txt",log_file);
   }
 
   do{
@@ -146,8 +147,8 @@ void save(void)
     scanf("%3s",ques);
   } while(strcmp(ques,"yes") != 0 && strcmp(ques,"no") != 0);
   if(strcmp(ques,"no")== 0){
-    remove("register.csv");
-    remove("player.csv");
-    remove("box.dat");
+    remove(".\\Datas\\register.csv");
+    remove(".\\Datas\\player.csv");
+    remove(".\\Datas\\box.dat");
   }
 }
